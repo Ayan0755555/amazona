@@ -19,7 +19,7 @@ const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
     <div className="card bg-base-300 shadow-xl mb-4">
       <figure>
         <Link href={`/product/${product.slug}`}>
-          <Link href="/">
+          <p>
             <Image
               src={product.image}
               alt={product.name}
@@ -27,14 +27,14 @@ const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
               height={300}
               className="object-cover h-64 w-full"
             />
-          </Link>
+          </p>
         </Link>
       </figure>
       <div className="card-body">
         <Link href={`/product/${product.slug}`}>
-          <Link href="/">
+          <p>
             <h2 className="card-title font-normal">{product.name}</h2>
-          </Link>
+          </p>
         </Link>
         <p className="mb-2">{product.brand}</p>
         <div className="card-actions flex items-center justify-between">
