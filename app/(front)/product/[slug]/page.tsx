@@ -1,7 +1,26 @@
 import AddToCart from "@/components/products/AddToCart"
 import data from "@/lib/data"
+import productService from "@/lib/services/productService"
 import Image from "next/image"
 import Link from "next/link"
+import { convertDocToObj } from '@/lib/utils'
+
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string }
+}) {
+  const product = await productService.getBySlug(params.slug)
+  if (!product) {
+    return { title: 'Product not found' }
+  }
+  return {
+    title: product.name,
+    description: product.description,
+  }
+}
+
 
 export default async function ProductDetails({
     params,
@@ -66,9 +85,9 @@ export default async function ProductDetails({
               </div>
               {product.countInStock !== 0 && (
                 <div className="card-actions justify-center">
-                  <AddToCart
+                   <AddToCart
                     item={{
-                      ...product,
+                      ...convertDocToObj(product),
                       qty: 0,
                       color: '',
                       size: '',
